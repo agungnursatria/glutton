@@ -9,7 +9,7 @@ In your flutter project add the dependency:
 ```yml
 dependencies:
   ...
-  glutton: ^0.0.1
+  glutton: ^1.0.0
 ```
 
 ## Usage
