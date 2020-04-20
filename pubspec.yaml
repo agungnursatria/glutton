@@ -1,7 +1,6 @@
 name: glutton
 description: Flutter shared preferences customized plugin. Secure, Encrypted, Simplified use, Simple key-value pairs storage.
 version: 0.0.1
-author: Agung Nursatria B <agungnursatria@gmail.com>
 homepage: https://github.com/agungnursatria/glutton
 
 environment:
