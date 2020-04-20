@@ -9,7 +9,7 @@ In your flutter project add the dependency:
 ```yml
 dependencies:
   ...
-  glutton: ^1.0.0
+  glutton: ^1.0.1
 ```
 
 ## Usage
@@ -39,6 +39,11 @@ bool isSuccess = await Glutton.digest(key);
 ```
 await Glutton.flush();
 ```
+
+## Can we save class object?
+The current answer is **no**.
+
+Written in [JSON and Serialization](https://flutter.dev/docs/development/data-and-backend/json), flutter doesn't provide library like GSON or Moshi. Such a library would require using runtime reflection, which is disabled in Flutter. So we can't automatically turn class into json or the opposite.
 
 ## Edible data type 
 - List
