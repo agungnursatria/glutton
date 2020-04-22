@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glutton_example/eat_class/eat_class_page.dart';
 import 'package:glutton_example/eat_date/eat_date_page.dart';
 import 'package:glutton_example/eat_enum/eat_enum_page.dart';
+import 'package:glutton_example/eat_uri/eat_uri_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -83,6 +84,16 @@ class _MainPageState extends State<MainPage> {
                     context,
                     MaterialPageRoute(
                       builder: (_) => EatDatePage(),
+                    ),
+                  ),
+                ),
+                RaisedButton(
+                  elevation: 0.0,
+                  child: Text('Example eat & vomit uri'),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => EatUriPage(),
                     ),
                   ),
                 ),

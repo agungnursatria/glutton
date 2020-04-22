@@ -43,6 +43,9 @@ class GluttonConverter {
       } else if (value is bool) {
         prefix = GluttonClassTypeConstant.Bool;
         unEncryptedValue = value.toString();
+      } else if (value is Uri) {
+        prefix = GluttonClassTypeConstant.Uri;
+        unEncryptedValue = value.toString();
       } else {
         throw GluttonFormatException(
           message: 'Wrong input, type ${value.runtimeType} is undefined',
@@ -86,6 +89,9 @@ class GluttonConverter {
         break;
       case GluttonClassTypeConstant.Bool:
         return splitted[1] == 'true';
+        break;
+      case GluttonClassTypeConstant.Uri:
+        return Uri.parse(splitted[1]);
         break;
       default:
         throw GluttonFormatException(

@@ -18,4 +18,5 @@ class GluttonClassTypeConstant {
   static const Int = 'GInt';
   static const Double = 'GDouble';
   static const Bool = 'GBool';
+  static const Uri = 'GUri';
 }
