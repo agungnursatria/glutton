@@ -62,8 +62,8 @@ Save:
 ```
 /// 1. Create user object
 User user = User(
-  name: "Gentleton,,
-  age: "21",
+  name: "Gentleton",
+  age: 21,
   createdAt: DateTime.now(),
 );
 
