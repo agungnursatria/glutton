@@ -43,11 +43,12 @@ class _EatUriPageState extends State<EatUriPage> {
         snackbarContent = (isSuccess)
             ? 'Yay! glutton eating the $uriKey value!'
             : 'Awww! there is something wrong';
+        setState(() {
+          _controllerFullUriString.clear();
+        });
+      } else {
+        snackbarContent = 'Invalid data, please fill the right uri';
       }
-
-      setState(() {
-        _controllerFullUriString.clear();
-      });
     }
 
     final snackBar = SnackBar(content: Text(snackbarContent));

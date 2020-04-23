@@ -10,8 +10,8 @@ class GluttonDigestion {
   GluttonStomach _stomach;
 
   GluttonDigestion() {
-    _converter = GluttonConverter();
     _utils = GluttonUtils();
+    _converter = GluttonConverter(_utils);
     _stomach = GluttonStomach();
   }
 

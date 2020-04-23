@@ -1,3 +1,8 @@
+## [1.0.2] - 04/23/2020
+
+* Fix eat list and set
+* Add eat uri
+
 ## [1.0.1] - 04/20/2020
 
 * Update Readme

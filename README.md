@@ -9,7 +9,7 @@ In your flutter project add the dependency:
 ```yml
 dependencies:
   ...
-  glutton: ^1.0.1
+  glutton: ^1.0.2
 ```
 
 ## Usage
@@ -54,6 +54,7 @@ Written in [JSON and Serialization](https://flutter.dev/docs/development/data-an
 - bool
 - int (can eat enum index here)
 - double
+- Uri
 
 ## Example 
 #### [Save & retrieve class](https://github.com/agungnursatria/glutton/blob/master/example/lib/eat_class)

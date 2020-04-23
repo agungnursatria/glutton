@@ -5,46 +5,54 @@ import 'package:glutton/src/exception/glutton_format_exception.dart';
 import 'package:glutton/src/exception/glutton_io_exception.dart';
 import 'package:glutton/src/utils/glutton_constant.dart';
 import 'package:glutton/src/utils/glutton_encrypter.dart';
+import 'package:glutton/src/utils/glutton_utils.dart';
 
 class GluttonConverter {
   GluttonEncrypter _encrypter;
-  GluttonConverter([GluttonEncrypter encrypter])
-      : _encrypter = encrypter ?? GluttonEncrypter();
+  GluttonUtils _utils;
+  GluttonConverter(GluttonUtils utils, [GluttonEncrypter encrypter])
+      : _encrypter = encrypter ?? GluttonEncrypter(),
+        _utils = utils;
 
   String splitter = '--';
 
   /// Convert edible value to string
   String convert(dynamic value) {
-    String prefix;
+    String type;
+    String innerType;
     String unEncryptedValue;
 
     try {
       if (value is List) {
-        prefix = GluttonClassTypeConstant.List;
+        type = GluttonClassTypeConstant.List;
+        if (value.isNotEmpty && !_utils.isDynamicInnerValue(value))
+          innerType = value.first.runtimeType.toString();
         unEncryptedValue = jsonEncode(value);
       } else if (value is Set) {
-        prefix = GluttonClassTypeConstant.Set;
+        type = GluttonClassTypeConstant.Set;
+        if (value.isNotEmpty && !_utils.isDynamicInnerValue(value))
+          innerType = value.first.runtimeType.toString();
         unEncryptedValue = jsonEncode(value.toList());
       } else if (value is Map) {
-        prefix = GluttonClassTypeConstant.Map;
+        type = GluttonClassTypeConstant.Map;
         unEncryptedValue = jsonEncode(value);
       } else if (value is DateTime) {
-        prefix = GluttonClassTypeConstant.DateTime;
+        type = GluttonClassTypeConstant.DateTime;
         unEncryptedValue = value.toIso8601String();
       } else if (value is String) {
-        prefix = GluttonClassTypeConstant.String;
+        type = GluttonClassTypeConstant.String;
         unEncryptedValue = value;
       } else if (value is int) {
-        prefix = GluttonClassTypeConstant.Int;
+        type = GluttonClassTypeConstant.Int;
         unEncryptedValue = value.toString();
       } else if (value is double) {
-        prefix = GluttonClassTypeConstant.Double;
+        type = GluttonClassTypeConstant.Double;
         unEncryptedValue = value.toString();
       } else if (value is bool) {
-        prefix = GluttonClassTypeConstant.Bool;
+        type = GluttonClassTypeConstant.Bool;
         unEncryptedValue = value.toString();
       } else if (value is Uri) {
-        prefix = GluttonClassTypeConstant.Uri;
+        type = GluttonClassTypeConstant.Uri;
         unEncryptedValue = value.toString();
       } else {
         throw GluttonFormatException(
@@ -55,7 +63,8 @@ class GluttonConverter {
       if (e is GluttonException) throw e;
       throw GluttonIOException(message: e.toString(), stackTrace: s);
     }
-    return _encrypter.encryptTwice('$prefix$splitter$unEncryptedValue');
+    return _encrypter
+        .encryptTwice('$type$splitter$unEncryptedValue$splitter$innerType');
   }
 
   /// Revert converted edible value to the real type
@@ -69,11 +78,39 @@ class GluttonConverter {
     List splitted = decryptedValue.split(splitter);
     switch (splitted[0]) {
       case GluttonClassTypeConstant.List:
+        List<dynamic> lst = jsonDecode(splitted[1]);
+        switch (splitted[2]) {
+          case 'int':
+            return List<int>.from(lst);
+          case 'String':
+            return List<String>.from(lst);
+          case 'bool':
+            return List<bool>.from(lst);
+          case 'double':
+            return List<double>.from(lst);
+            break;
+          default:
+            return lst;
+        }
+        break;
       case GluttonClassTypeConstant.Map:
         return jsonDecode(splitted[1]);
         break;
       case GluttonClassTypeConstant.Set:
-        return jsonDecode(splitted[1]).toSet();
+        Set<dynamic> st = jsonDecode(splitted[1]).toSet();
+        switch (splitted[2]) {
+          case 'int':
+            return Set<int>.from(st);
+          case 'String':
+            return Set<String>.from(st);
+          case 'bool':
+            return Set<bool>.from(st);
+          case 'double':
+            return Set<double>.from(st);
+            break;
+          default:
+            return st;
+        }
         break;
       case GluttonClassTypeConstant.DateTime:
         return DateTime.parse(splitted[1]);
