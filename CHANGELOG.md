@@ -1,3 +1,8 @@
+## [1.0.3] - 04/30/2020
+
+* Update readme
+* Fixing description
+
 ## [1.0.2] - 04/23/2020
 
 * Fix eat list and set
