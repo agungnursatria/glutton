@@ -116,7 +116,7 @@ class GluttonConverter {
         return DateTime.parse(splitted[1]);
         break;
       case GluttonClassTypeConstant.String:
-        return DateTime.parse(splitted[1]);
+        return splitted[1];
         break;
       case GluttonClassTypeConstant.Int:
         return int.parse(splitted[1]);
