@@ -1,3 +1,7 @@
+## [1.0.5] - 06/11/2020
+
+- Update readme
+
 ## [1.0.4] - 06/11/2020
 
 - Fixing revert string
