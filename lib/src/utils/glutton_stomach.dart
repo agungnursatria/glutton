@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GluttonStomach {
-  SharedPreferences _storage;
+  late SharedPreferences _storage;
 
   /// Save encrypted string data inside storage
   Future<bool> eat(String key, String value) async {

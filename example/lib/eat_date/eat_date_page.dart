@@ -8,11 +8,11 @@ class EatDatePage extends StatefulWidget {
 }
 
 class _EatDatePageState extends State<EatDatePage> {
-  TextEditingController _controller;
-  DateTime _selectedDate;
+  late TextEditingController _controller;
+  late DateTime _selectedDate;
   String _dateKey = 'dateKey';
 
-  DateTime _vomittedSelectedDate;
+  late DateTime _vomittedSelectedDate;
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _EatDatePageState extends State<EatDatePage> {
       lastDate: DateTime(2030),
     ).then((newDate) {
       setState(() {
-        _selectedDate = newDate;
+        _selectedDate = newDate!;
       });
     });
   }

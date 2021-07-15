@@ -8,12 +8,12 @@ class GluttonIOException extends GluttonException {
   StackTrace _stackTrace;
 
   GluttonIOException({
-    String message,
-    DateTime time,
-    StackTrace stackTrace,
+    String? message,
+    DateTime? time,
+    StackTrace? stackTrace,
   })  : this._message = message ?? GluttonConstant.undefinedError,
         this._time = time ?? DateTime.now(),
-        this._stackTrace = stackTrace;
+        this._stackTrace = stackTrace!;
 
   get message => _message;
   get time => _time;
