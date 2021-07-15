@@ -9,9 +9,9 @@ class User {
   DateTime createdAt;
 
   User({
-    this.name,
-    this.age,
-    this.createdAt,
+    required this.name,
+    required this.age,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toJson() => _$UserToJson(this);

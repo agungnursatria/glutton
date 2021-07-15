@@ -9,8 +9,8 @@ class EatClassPage extends StatefulWidget {
 }
 
 class _EatClassPageState extends State<EatClassPage> {
-  TextEditingController _controllerName;
-  TextEditingController _controllerAge;
+  late TextEditingController _controllerName;
+  late TextEditingController _controllerAge;
 
   String vomittedUserText = '-';
 

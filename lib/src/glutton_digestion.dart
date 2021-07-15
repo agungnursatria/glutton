@@ -5,9 +5,9 @@ import 'package:glutton/src/utils/glutton_stomach.dart';
 import 'package:glutton/src/utils/glutton_utils.dart';
 
 class GluttonDigestion {
-  GluttonConverter _converter;
-  GluttonUtils _utils;
-  GluttonStomach _stomach;
+  late GluttonConverter _converter;
+  late GluttonUtils _utils;
+  late GluttonStomach _stomach;
 
   GluttonDigestion() {
     _utils = GluttonUtils();

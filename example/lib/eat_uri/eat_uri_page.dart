@@ -7,8 +7,8 @@ class EatUriPage extends StatefulWidget {
 }
 
 class _EatUriPageState extends State<EatUriPage> {
-  TextEditingController _controllerFullUriString;
-  Uri shownUri;
+  late TextEditingController _controllerFullUriString;
+  late Uri shownUri;
 
   String uriKey = 'urlKey';
 

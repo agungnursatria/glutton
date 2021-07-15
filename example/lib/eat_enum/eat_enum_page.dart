@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:glutton/glutton.dart';
 import 'package:glutton_example/eat_enum/enum_season.dart';
 
+import 'enum_season.dart';
+
 class EatEnumPage extends StatefulWidget {
   @override
   _EatEnumPageState createState() => _EatEnumPageState();
@@ -36,7 +38,7 @@ class _EatEnumPageState extends State<EatEnumPage> {
     int index = await Glutton.vomit(seasonKey);
 
     /// 2. Transform index to enum
-    Season _season = SeasonManager.fromIndex(index);
+    Season _season = SeasonManager.fromIndex(index)!;
 
     setState(() {
       vomittedValue = (_season == null) ? '-' : _season.toString().substring(7);
@@ -95,7 +97,7 @@ class _EatEnumPageState extends State<EatEnumPage> {
                       )
                       .toList(),
                   value: selectedValue,
-                  onChanged: (value) => eatEnum(scaffoldContext, value),
+                  onChanged: (value) => eatEnum(scaffoldContext, value as Season),
                 ),
                 SizedBox(height: 8.0),
                 Divider(),
