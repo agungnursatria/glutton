@@ -18,9 +18,9 @@ class GluttonConverter {
 
   /// Convert edible value to string
   String convert(dynamic value) {
-    late String type;
-    late String innerType;
-    late String unEncryptedValue;
+    String? type;
+    String? innerType;
+    String? unEncryptedValue;
 
     try {
       if (value is List) {

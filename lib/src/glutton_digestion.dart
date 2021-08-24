@@ -7,12 +7,11 @@ import 'package:glutton/src/utils/glutton_utils.dart';
 class GluttonDigestion {
   late GluttonConverter _converter;
   late GluttonUtils _utils;
-  late GluttonStomach _stomach;
+  GluttonStomach _stomach = GluttonStomach();
 
   GluttonDigestion() {
     _utils = GluttonUtils();
     _converter = GluttonConverter(_utils);
-    _stomach = GluttonStomach();
   }
 
   /// Check if value with [key] exist
