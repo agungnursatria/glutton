@@ -10,9 +10,9 @@ User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     name: json['name'] as String,
     age: json['age'] as int,
-    createdAt: json['createdAt'] == null
+    createdAt: (json['createdAt'] == null
         ? null
-        : DateTime.parse(json['createdAt'] as String),
+        : DateTime.parse(json['createdAt'] as String))!,
   );
 }
 

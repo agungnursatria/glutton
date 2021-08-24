@@ -10,7 +10,7 @@ import 'package:glutton/src/utils/glutton_utils.dart';
 class GluttonConverter {
   GluttonEncrypter _encrypter;
   GluttonUtils _utils;
-  GluttonConverter(GluttonUtils utils, [GluttonEncrypter encrypter])
+  GluttonConverter(GluttonUtils utils, [GluttonEncrypter? encrypter])
       : _encrypter = encrypter ?? GluttonEncrypter(),
         _utils = utils;
 
@@ -18,9 +18,9 @@ class GluttonConverter {
 
   /// Convert edible value to string
   String convert(dynamic value) {
-    String type;
-    String innerType;
-    String unEncryptedValue;
+    String? type;
+    String? innerType;
+    String? unEncryptedValue;
 
     try {
       if (value is List) {
