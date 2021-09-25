@@ -4,9 +4,9 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User {
-  String name;
-  int age;
-  DateTime createdAt;
+  String? name;
+  int? age;
+  DateTime? createdAt;
 
   User({
     this.name,

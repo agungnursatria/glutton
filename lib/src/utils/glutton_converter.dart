@@ -10,7 +10,7 @@ import 'package:glutton/src/utils/glutton_utils.dart';
 class GluttonConverter {
   GluttonEncrypter _encrypter;
   GluttonUtils _utils;
-  GluttonConverter(GluttonUtils utils, [GluttonEncrypter encrypter])
+  GluttonConverter(GluttonUtils utils, [GluttonEncrypter? encrypter])
       : _encrypter = encrypter ?? GluttonEncrypter(),
         _utils = utils;
 
@@ -18,9 +18,9 @@ class GluttonConverter {
 
   /// Convert edible value to string
   String convert(dynamic value) {
-    String type;
-    String innerType;
-    String unEncryptedValue;
+    String? type;
+    String? innerType;
+    String? unEncryptedValue;
 
     try {
       if (value is List) {
@@ -63,17 +63,13 @@ class GluttonConverter {
       if (e is GluttonException) throw e;
       throw GluttonIOException(message: e.toString(), stackTrace: s);
     }
-    return _encrypter
-        .encryptTwice('$type$splitter$unEncryptedValue$splitter$innerType');
+    return _encrypter.encryptTwice(
+      '$type$splitter$unEncryptedValue$splitter$innerType',
+    );
   }
 
   /// Revert converted edible value to the real type
   dynamic revert(String encryptedValue) {
-    if (encryptedValue == null)
-      throw GluttonFormatException(
-        message: 'Wrong input, cannot receive null value',
-      );
-
     String decryptedValue = _encrypter.decryptTwice(encryptedValue);
     List splitted = decryptedValue.split(splitter);
     switch (splitted[0]) {
@@ -88,14 +84,11 @@ class GluttonConverter {
             return List<bool>.from(lst);
           case 'double':
             return List<double>.from(lst);
-            break;
           default:
             return lst;
         }
-        break;
       case GluttonClassTypeConstant.Map:
         return jsonDecode(splitted[1]);
-        break;
       case GluttonClassTypeConstant.Set:
         Set<dynamic> st = jsonDecode(splitted[1]).toSet();
         switch (splitted[2]) {
@@ -107,34 +100,25 @@ class GluttonConverter {
             return Set<bool>.from(st);
           case 'double':
             return Set<double>.from(st);
-            break;
           default:
             return st;
         }
-        break;
       case GluttonClassTypeConstant.DateTime:
         return DateTime.parse(splitted[1]);
-        break;
       case GluttonClassTypeConstant.String:
         return splitted[1];
-        break;
       case GluttonClassTypeConstant.Int:
         return int.parse(splitted[1]);
-        break;
       case GluttonClassTypeConstant.Double:
         return double.parse(splitted[1]);
-        break;
       case GluttonClassTypeConstant.Bool:
         return splitted[1] == 'true';
-        break;
       case GluttonClassTypeConstant.Uri:
         return Uri.parse(splitted[1]);
-        break;
       default:
         throw GluttonFormatException(
           message: 'Wrong input, undefined class type',
         );
-        break;
     }
   }
 }

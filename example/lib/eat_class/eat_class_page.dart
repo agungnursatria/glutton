@@ -9,8 +9,8 @@ class EatClassPage extends StatefulWidget {
 }
 
 class _EatClassPageState extends State<EatClassPage> {
-  TextEditingController _controllerName;
-  TextEditingController _controllerAge;
+  late TextEditingController _controllerName;
+  late TextEditingController _controllerAge;
 
   String vomittedUserText = '-';
 
@@ -44,12 +44,12 @@ class _EatClassPageState extends State<EatClassPage> {
     }
 
     final snackBar = SnackBar(content: Text(snackbarContent));
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Future vomitUser(BuildContext context) async {
     /// 1. Retrieve user map inside glutton
-    Map<String, dynamic> userMap = await Glutton.vomit(userKey);
+    Map<String, dynamic>? userMap = await Glutton.vomit(userKey);
     if (userMap != null) {
       /// 2. Transform user map to user object
       User user = User.fromJson(userMap);
@@ -60,7 +60,7 @@ class _EatClassPageState extends State<EatClassPage> {
     } else {
       final snackBar =
           SnackBar(content: Text('Awww! data not found from key: $userKey'));
-      Scaffold.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       setState(() {
         vomittedUserText = 'Data not found';
       });
@@ -73,7 +73,7 @@ class _EatClassPageState extends State<EatClassPage> {
         ? 'Success digesting $userKey value'
         : '$userKey value is not found';
     final snackBar = SnackBar(content: Text(snackbarContent));
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   void hideKeyboard(BuildContext context) {
@@ -136,7 +136,7 @@ class _EatClassPageState extends State<EatClassPage> {
                 TextFormField(
                   controller: _controllerAge,
                   keyboardType: TextInputType.number,
-                  inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: InputDecoration(
                     hintText: 'Input your age...',
                   ),
@@ -144,12 +144,15 @@ class _EatClassPageState extends State<EatClassPage> {
                 SizedBox(height: 16.0),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Eat'),
-                    onPressed: () async {
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Eat',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
                       hideKeyboard(context);
-                      await eatUser(scaffoldContext);
+                      eatUser(scaffoldContext);
                     },
                   ),
                 ),
@@ -183,12 +186,15 @@ class _EatClassPageState extends State<EatClassPage> {
                 SizedBox(height: 16.0),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Vomit'),
-                    onPressed: () async {
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Vomit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
                       hideKeyboard(context);
-                      await vomitUser(scaffoldContext);
+                      vomitUser(scaffoldContext);
                     },
                   ),
                 ),
@@ -213,12 +219,15 @@ class _EatClassPageState extends State<EatClassPage> {
                 ),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Digest'),
-                    onPressed: () async {
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Digest',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
                       hideKeyboard(context);
-                      await digestUser(scaffoldContext);
+                      digestUser(scaffoldContext);
                     },
                   ),
                 ),

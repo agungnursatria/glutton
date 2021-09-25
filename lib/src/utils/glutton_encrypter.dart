@@ -8,8 +8,8 @@ class GluttonEncrypter {
   IV _iv;
 
   GluttonEncrypter({
-    Encrypter encrypter,
-    IV iv,
+    Encrypter? encrypter,
+    IV? iv,
   })  : _iv = iv ?? IV.fromLength(16),
         _encrypter = encrypter ?? Encrypter(AES(Key.fromUtf8(_aesKey)));
 

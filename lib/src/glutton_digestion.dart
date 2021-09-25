@@ -5,9 +5,9 @@ import 'package:glutton/src/utils/glutton_stomach.dart';
 import 'package:glutton/src/utils/glutton_utils.dart';
 
 class GluttonDigestion {
-  GluttonConverter _converter;
-  GluttonUtils _utils;
-  GluttonStomach _stomach;
+  late GluttonConverter _converter;
+  late GluttonUtils _utils;
+  late GluttonStomach _stomach;
 
   GluttonDigestion() {
     _utils = GluttonUtils();
@@ -46,13 +46,13 @@ class GluttonDigestion {
       throw GluttonFormatException(message: GluttonConstant.wrongInputError);
 
     /// Retrieve encrypted value inside glutton stomach
-    String convertedValue = await _stomach.vomit(key);
+    String? convertedValue = await _stomach.vomit(key);
 
     /// Check if retrieved encrypted value exist
     /// Return defaultValue if encrypted value not exist
     if (_utils.isNullOrEmpty(convertedValue)) return defaultValue;
 
     /// Return unencrypted (real) value
-    return _converter.revert(convertedValue);
+    return _converter.revert(convertedValue!);
   }
 }

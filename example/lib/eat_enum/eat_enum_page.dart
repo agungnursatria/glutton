@@ -8,7 +8,7 @@ class EatEnumPage extends StatefulWidget {
 }
 
 class _EatEnumPageState extends State<EatEnumPage> {
-  String seasonKey = "seasonKey";
+  static const String seasonKey = "seasonKey";
   Season selectedValue = Season.Spring;
   String vomittedValue = '-';
 
@@ -24,7 +24,7 @@ class _EatEnumPageState extends State<EatEnumPage> {
         ? 'Yay! glutton eating the $seasonKey value!'
         : 'Awww! there is something wrong';
     final snackBar = SnackBar(content: Text(snackbarContent));
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
     setState(() {
       selectedValue = season;
@@ -33,10 +33,10 @@ class _EatEnumPageState extends State<EatEnumPage> {
 
   vomitEnum(BuildContext context) async {
     /// 1. Retrieve index inside glutton
-    int index = await Glutton.vomit(seasonKey);
+    int? index = await Glutton.vomit(seasonKey);
 
     /// 2. Transform index to enum
-    Season _season = SeasonManager.fromIndex(index);
+    Season? _season = SeasonManager.fromIndex(index);
 
     setState(() {
       vomittedValue = (_season == null) ? '-' : _season.toString().substring(7);
@@ -95,7 +95,10 @@ class _EatEnumPageState extends State<EatEnumPage> {
                       )
                       .toList(),
                   value: selectedValue,
-                  onChanged: (value) => eatEnum(scaffoldContext, value),
+                  onChanged: (value) => eatEnum(
+                    scaffoldContext,
+                    value as Season,
+                  ),
                 ),
                 SizedBox(height: 8.0),
                 Divider(),
@@ -127,12 +130,15 @@ class _EatEnumPageState extends State<EatEnumPage> {
                 SizedBox(height: 16.0),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Vomit'),
-                    onPressed: () async {
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Vomit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
                       hideKeyboard(context);
-                      await vomitEnum(scaffoldContext);
+                      vomitEnum(scaffoldContext);
                     },
                   ),
                 ),

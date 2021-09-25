@@ -57,9 +57,12 @@ class _MainPageState extends State<MainPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                RaisedButton(
-                  elevation: 0.0,
-                  child: Text('Example eat & vomit class'),
+                TextButton(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  child: Text(
+                    'Example eat & vomit class',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -67,9 +70,12 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  elevation: 0.0,
-                  child: Text('Example eat & vomit enum'),
+                TextButton(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  child: Text(
+                    'Example eat & vomit enum',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -77,9 +83,12 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  elevation: 0.0,
-                  child: Text('Example eat & vomit date'),
+                TextButton(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  child: Text(
+                    'Example eat & vomit date',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -87,9 +96,12 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-                RaisedButton(
-                  elevation: 0.0,
-                  child: Text('Example eat & vomit uri'),
+                TextButton(
+                  style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                  child: Text(
+                    'Example eat & vomit uri',
+                    style: TextStyle(color: Colors.white),
+                  ),
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(

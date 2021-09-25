@@ -5,12 +5,12 @@ import 'package:glutton/src/utils/glutton_constant.dart';
 class GluttonIOException extends GluttonException {
   String _message;
   DateTime _time;
-  StackTrace _stackTrace;
+  StackTrace? _stackTrace;
 
   GluttonIOException({
-    String message,
-    DateTime time,
-    StackTrace stackTrace,
+    String? message,
+    DateTime? time,
+    StackTrace? stackTrace,
   })  : this._message = message ?? GluttonConstant.undefinedError,
         this._time = time ?? DateTime.now(),
         this._stackTrace = stackTrace;

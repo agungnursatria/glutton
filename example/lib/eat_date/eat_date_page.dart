@@ -8,11 +8,11 @@ class EatDatePage extends StatefulWidget {
 }
 
 class _EatDatePageState extends State<EatDatePage> {
-  TextEditingController _controller;
-  DateTime _selectedDate;
-  String _dateKey = 'dateKey';
+  static const String _dateKey = 'dateKey';
+  late TextEditingController _controller;
+  late DateTime _selectedDate;
 
-  DateTime _vomittedSelectedDate;
+  DateTime? _vomittedSelectedDate;
 
   @override
   void initState() {
@@ -35,6 +35,7 @@ class _EatDatePageState extends State<EatDatePage> {
       firstDate: DateTime(1990),
       lastDate: DateTime(2030),
     ).then((newDate) {
+      if (newDate == null) return;
       setState(() {
         _selectedDate = newDate;
       });
@@ -50,7 +51,7 @@ class _EatDatePageState extends State<EatDatePage> {
         ? 'Yay! glutton eating the $_dateKey value!'
         : 'Awww! there is something wrong';
     final snackBar = SnackBar(content: Text(snackbarContent));
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Future vomitEnum(BuildContext context) async {
@@ -131,11 +132,14 @@ class _EatDatePageState extends State<EatDatePage> {
                 SizedBox(height: 16.0),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Eat'),
-                    onPressed: () async {
-                      await eatDate(scaffoldContext);
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Eat',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      eatDate(scaffoldContext);
                     },
                   ),
                 ),
@@ -162,7 +166,7 @@ class _EatDatePageState extends State<EatDatePage> {
                 Text(
                   (_vomittedSelectedDate == null)
                       ? '-'
-                      : formattedDate(_vomittedSelectedDate),
+                      : formattedDate(_vomittedSelectedDate!),
                   style: TextStyle(
                     color: Colors.black54,
                     fontSize: 16.0,
@@ -171,12 +175,13 @@ class _EatDatePageState extends State<EatDatePage> {
                 SizedBox(height: 16.0),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Vomit'),
-                    onPressed: () async {
-                      await vomitEnum(scaffoldContext);
-                    },
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Vomit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => vomitEnum(scaffoldContext),
                   ),
                 ),
               ],

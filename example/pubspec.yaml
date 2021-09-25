@@ -1,5 +1,6 @@
 name: glutton_example
 description: Glutton example app
+publish_to: none
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -14,23 +15,28 @@ description: Glutton example app
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  json_annotation: ^3.0.1
-  intl: ^0.16.1
+  json_annotation: ^4.1.0 
+  intl: ^0.17.0
   glutton:
+    # When depending on this package from a real application you should use:
+    #   glutton: ^x.y.z
+    # See https://dart.dev/tools/pub/dependencies#version-constraints
+    # The example app is bundled with the plugin so we use a path dependency on
+    # the parent directory to use the current plugin's version.
     path: ../
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.3
 
 dev_dependencies:
-  json_serializable: ^3.3.0
-  build_runner: ^1.8.1
+  json_serializable: ^5.0.2
+  build_runner: ^2.1.2
   flutter_test:
     sdk: flutter
 

@@ -7,8 +7,8 @@ class EatUriPage extends StatefulWidget {
 }
 
 class _EatUriPageState extends State<EatUriPage> {
-  TextEditingController _controllerFullUriString;
-  Uri shownUri;
+  late TextEditingController _controllerFullUriString;
+  Uri? shownUri;
 
   String uriKey = 'urlKey';
 
@@ -52,7 +52,7 @@ class _EatUriPageState extends State<EatUriPage> {
     }
 
     final snackBar = SnackBar(content: Text(snackbarContent));
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   Future vomit(BuildContext context) async {
@@ -96,17 +96,20 @@ class _EatUriPageState extends State<EatUriPage> {
                 TextFormField(
                   controller: _controllerFullUriString,
                   decoration: InputDecoration(
-                    hintText: 'Input your uri...',
+                    hintText: 'E.g https://google.com',
                   ),
                 ),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Eat'),
-                    onPressed: () async {
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Eat',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
                       hideKeyboard(context);
-                      await eat(scaffoldContext);
+                      eat(scaffoldContext);
                     },
                   ),
                 ),
@@ -137,22 +140,16 @@ class _EatUriPageState extends State<EatUriPage> {
                     fontSize: 16.0,
                   ),
                 ),
-                Text(
-                  'Instance: ${shownUri.runtimeType}',
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16.0,
-                  ),
-                ),
                 SizedBox(height: 16.0),
                 Container(
                   width: double.infinity,
-                  child: RaisedButton(
-                    elevation: 0.0,
-                    child: Text('Vomit'),
-                    onPressed: () async {
-                      await vomit(scaffoldContext);
-                    },
+                  child: TextButton(
+                    style: TextButton.styleFrom(backgroundColor: Colors.blue),
+                    child: Text(
+                      'Vomit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => vomit(scaffoldContext),
                   ),
                 ),
               ],
