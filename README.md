@@ -9,7 +9,7 @@ In your flutter project add the dependency:
 ```yml
 dependencies:
   ...
-  glutton: ^1.0.5
+  glutton: ^2.0.0
 ```
 
 ## Usage
@@ -95,7 +95,7 @@ Retrieve
 
 ```dart
 /// 1. Retrieve user map inside glutton
-Map<String, dynamic> userMap = await Glutton.vomit(<UserKey>);
+Map<String, dynamic>? userMap = await Glutton.vomit(<UserKey>);
 
 /// 2. Transform user map to user object
 User user = User.fromJson(userMap);
@@ -122,7 +122,7 @@ Retrieve
 
 ```dart
 /// 1. Retrieve user map inside glutton
-DateTime date = await Glutton.vomit(<DateKey>);
+DateTime? date = await Glutton.vomit(<DateKey>);
 ```
 
 #### [Save & retrieve enum](https://github.com/agungnursatria/glutton/blob/master/example/lib/eat_enum)
@@ -141,7 +141,7 @@ Retrieve
 
 ```dart
 /// 1. Retrieve index inside glutton
-int index = await Glutton.vomit(<enumKey>);
+int? index = await Glutton.vomit(<enumKey>);
 
 /// 2. Transform index to enum
 Season _season = SeasonManager.fromIndex(index);
